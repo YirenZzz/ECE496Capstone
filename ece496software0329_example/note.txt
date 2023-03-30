@@ -1,0 +1,3 @@
+python example_model.py
+python convert_to_tflite.py
+xxd -i example_model.tflite > output_model.h
