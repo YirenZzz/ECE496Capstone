@@ -144,3 +144,98 @@ def preprocess_data(data_dir, trainfile_idx, testfile_idx):
     print_n_samples_each_class(y_train)
     print(" ")
     return x_train, y_train, x_val, y_val
+
+def preprocess_data_BiLSTM(data_dir, trainfile_idx, testfile_idx):
+    # Load all files
+    # print('data_dir:',data_dir)
+    allfiles = os.listdir(data_dir)
+    
+    train_files = []
+    test_files = []
+    
+    for idx in trainfile_idx:
+        train_files.append(allfiles[idx])
+        
+    for idx in testfile_idx:
+        test_files.append(allfiles[idx])
+    # # Ns: the number of subjects in the dataset
+    # Ns = int(len(allfiles) / k_folds)
+    # print('Ns:',Ns)
+    
+    # Split train and test files
+    test_files = sorted(test_files)
+    train_files = sorted(train_files)
+    
+    # print("test_files:",test_files)
+    
+    # Load data in npz files
+    # data_train: (2796, 1, 7680)
+    # label_train: (2796,)
+    data_train, label_train = load_npz_list_files(data_dir,train_files)
+    # x_val: (2884, 1, 7680)
+    # y_val: (2884,)
+    x_val, y_val = load_npz_list_files(data_dir, test_files)
+    # print('data_train',data_train.shape) # 
+    # print('x_val',x_val.shape) # (2884, 1, 7680)
+    # print('label_train',label_train.shape) # (2796,)
+    # print('y_val',y_val.shape) # (2884,)
+    
+    # Reshape the data to match the input of the model - conv2d
+    data_train = np.squeeze(data_train) # (3868, 7680)
+    x_val = np.squeeze(x_val) # (1812, 7680)
+    data_train = data_train[:, :, np.newaxis, np.newaxis] # (3868, 7680, 1, 1)
+    x_val = x_val[:, :, np.newaxis, np.newaxis] # (1812, 7680, 1, 1)
+    
+    # Casting
+    data_train = data_train.astype(np.float32)
+    label_train = label_train.astype(np.int32)
+    x_val = x_val.astype(np.float32)
+    y_val = y_val.astype(np.int32)
+        
+    # print('reshaped data_train',data_train.shape)
+    # print('reshaped x_val',x_val.shape)
+    
+    # print("Training set: {}, {}".format(data_train.shape, label_train.shape))
+    # print_n_samples_each_class(label_train)
+    # print(" ")
+    # print("Validation set: {}, {}".format(x_val.shape, y_val.shape))
+    # print_n_samples_each_class(y_val)
+    # print(" ")
+    
+    # Use balanced-class, oversample training set
+    # x_train, y_train = get_balance_class_oversample(
+    #         x=data_train, y=label_train
+    # )
+    # # print("Oversampled training set: {}, {}".format(
+    # #     x_train.shape, y_train.shape
+    # # ))
+    # print_n_samples_each_class(y_train)
+    print(" ")
+    return data_train, label_train, x_val, y_val
+
+
+def test_preprocess_data(data_dir):
+    # Load all files
+    # print('data_dir:',data_dir)
+    test_files = os.listdir(data_dir)
+    
+    test_files = sorted(test_files)
+    
+    x_val, y_val = load_npz_list_files(data_dir, test_files)
+    # print('data_train',data_train.shape) # 
+    # print('x_val',x_val.shape) # (2884, 1, 7680)
+    # print('label_train',label_train.shape) # (2796,)
+    # print('y_val',y_val.shape) # (2884,)
+    
+    # Reshape the data to match the input of the model - conv2d
+    x_val = np.squeeze(x_val) # (1812, 7680)
+    x_val = x_val[:, :, np.newaxis, np.newaxis] # (1812, 7680, 1, 1)
+    
+    # Casting
+    x_val = x_val.astype(np.float32)
+    y_val = y_val.astype(np.int32)
+        
+    print(" ")
+    return x_val, y_val
+
+# test_preprocess_data("data/eeg_fz_ler/test/")
