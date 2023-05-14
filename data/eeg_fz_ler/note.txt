@@ -1,1 +1,0 @@
-This directory should contain preprocessed data in npz format.
