@@ -14,13 +14,13 @@ The model was built and trained using a concatenation of CNNs and BiLSTM.
 ```
 pretrain.py --data_dir data/{cetain_channel}/ --k_folds {k_folds} --epochs {epochs} --batch_size {batch_size} --model_mode {model_mode}
 ```
-Results from pretraining were saved in Software/output/{best_CNN}/ directory. 
+Results from pretraining were saved in ```Software/output/{best_CNN}/``` directory. 
 
 2. Concatenate the outputs with the BiLSTM model for the fine-tuning process by running 
 ```
 fineTune.py --data_dir Software/output/{best_CNN}/ --k_folds {k_folds} --epochs {epochs} --batch_size {batch_size} 
 ```
-Results from fineTune were saved in Software/output/{bestModel}/ directory. 
+Results from fineTune were saved in ```Software/output/{bestModel}/``` directory, which will be converted to Tensorflow Lite model for hardware deployment.
 
 ## Hardware Source Code References
 
