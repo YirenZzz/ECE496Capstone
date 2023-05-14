@@ -1,7 +1,7 @@
 # ECE496Capstone
 
 ## Dataset
-The project used the MASS-SS3 dataset. 
+This project use the MASS-SS3 dataset. 
 
 ## Software
 ### Data Preprocessing
