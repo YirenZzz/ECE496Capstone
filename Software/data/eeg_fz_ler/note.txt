@@ -1,1 +1,14 @@
-This directory should contain preprocessed data in npz format.
+This directory should contain dataset files in npz format. In this project, we used the MASS SS3 dataset and converted the raw data, which was initially in edf format, to npz files. The preprocessing of the raw data was done following the methodology described by DeepSleepNet.
+
+@article{Supratak2017,
+    title = {DeepSleepNet: a Model for Automatic Sleep Stage Scoring based on Raw Single-Channel EEG},
+    author = {Supratak, Akara and Dong, Hao and Wu, Chao and Guo, Yike},
+    journal = {IEEE Transactions on Neural Systems and Rehabilitation Engineering},
+    year = {2017},
+    month = {Nov},
+    volume = {25}, 
+    number = {11}, 
+    pages = {1998-2008}, 
+    doi = {10.1109/TNSRE.2017.2721116}, 
+    ISSN = {1534-4320}, 
+}
