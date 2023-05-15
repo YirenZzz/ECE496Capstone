@@ -5,7 +5,7 @@ This project use the MASS-SS3 dataset.
 
 ## Software
 ### Data Preprocessing
-The raw EEG data is in edf file format and consisted of an Annotated dataset and a PSG dataset. We converted the PSG.edf into multiple 30s segments with a 256Hz sampling as the input x, the data in corresponding Annotation.edf as label y. After encoding and removing any dirty data, the processed data were saved in npz file format. The npz files were then stored in ```Software/data/{cetain_channel}/``` directory.
+The raw EEG data is in edf file format and consisted of an Annotated dataset and a PSG dataset. We converted the PSG.edf into multiple 30s segments with a 256Hz sampling as the input x, the data in the corresponding Annotation.edf as label y. After encoding and removing any dirty data(including data with label of ?), the processed data were saved in npz file format and were then stored in ```Software/data/{cetain_channel}/``` directory.
 
 ### Model Building and Training
 The model was built and trained using a concatenation of CNNs and BiLSTM. 
